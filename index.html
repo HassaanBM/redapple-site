@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Apple Food Box | Neighborhood Convenience Store</title>
+<meta name="description" content="Red Apple Food Box is a neighborhood convenience store for everyday essentials, snacks, drinks and packaged foods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&display=swap">
+<script type="importmap">
+{
+  "imports": {
+    "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.18/+esm"
+  }
+}
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Icon sprite: apple mark (body uses currentColor, leaf is green) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="apple" viewBox="0 0 32 32">
+    <path fill="currentColor" d="M16 10.5C13.5 8.2 8.5 8.8 6.8 13c-1.800 4.500.8 11.500 4.400 13.600 1.600.9 3.200.2 4.800.2s3.200.7 4.800-.2c3.600-2.100 6.200-9.100 4.400-13.600-1.700-4.200-6.700-4.800-9.200-2.500Z"/>
+    <path fill="#5fb067" d="M16.400 9.600C16.200 6.600 18 4.200 21.200 3.600c.4 3.200-1.600 5.600-4.800 6Z"/>
+  </symbol>
+  <symbol id="down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ext" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- Loader -->
+<div id="loader" aria-label="Loading Red Apple Food Box" role="status">
+  <div class="logo"><svg aria-hidden="true"><use href="#apple"/></svg><span><b>Red Apple</b><small>Food Box</small></span></div>
+  <div class="track"><div id="loader-fill"></div></div>
+</div>
+
+<!-- Fullscreen menu -->
+<div id="menu" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="menu-top">
+    <div class="logo"><svg aria-hidden="true"><use href="#apple"/></svg><span><b>Red Apple</b><small>Food Box</small></span></div>
+    <button class="menu-close" id="menu-close" aria-label="Close menu"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+  </div>
+  <div>
+    <span class="eyebrow light" style="margin-bottom:1.2rem">On this page</span>
+    <nav class="menu-links" aria-label="Jump to a section on this page">
+      <a href="#categories">Categories<svg aria-hidden="true"><use href="#down"/></svg></a>
+      <a href="#products">Products<svg aria-hidden="true"><use href="#down"/></svg></a>
+      <a href="#store">Our Store<svg aria-hidden="true"><use href="#down"/></svg></a>
+      <a href="#contact">Visit Us<svg aria-hidden="true"><use href="#down"/></svg></a>
+    </nav>
+  </div>
+  <div class="menu-bottom">
+    <a class="pill pill-light" data-maps href="#" target="_blank" rel="noopener noreferrer">Find Our Store <svg aria-hidden="true"><use href="#ext"/></svg></a>
+  </div>
+</div>
+
+<!-- Contact modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="panel" id="panel">
+    <div class="panel-head">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h2 id="modal-title"><span class="ln">How Can We</span><span class="ln">Help You?</span></h2>
+      </div>
+      <button class="x" id="modal-close" aria-label="Close contact form"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+    </div>
+    <form id="contact-form" novalidate>
+      <label for="f-name">Full name<input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name" required></label>
+      <label for="f-email">Email<input id="f-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
+      <label for="f-msg">Message<textarea id="f-msg" name="message" placeholder="How can we help?" required></textarea></label>
+      <p class="demo-note">This form is a demonstration. Nothing is sent to the store.</p>
+      <button class="pill pill-solid" type="submit" style="align-self:flex-start">Preview message <svg aria-hidden="true"><use href="#arrow"/></svg></button>
+    </form>
+    <div class="sent" id="sent" role="status">
+      <h3 style="font-size:1.4rem">Demo only</h3>
+      <p>No message was sent. This form does not connect to Red Apple Food Box. To reach the store, open its Google Maps listing.</p>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <a class="pill pill-solid" data-maps href="#" target="_blank" rel="noopener noreferrer">Open in Google Maps <svg aria-hidden="true"><use href="#ext"/></svg></a>
+        <button class="pill pill-outline" id="sent-close" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg"><img data-art="hero" id="hero-img" alt="" fetchpriority="high" loading="eager" width="1600" height="1000"></div>
+
+    <header class="site-header">
+      <nav class="nav-left" aria-label="Jump to a section on this page">
+        <a class="jump" href="#products" title="Jump to this section">Shop Essentials<svg aria-hidden="true"><use href="#down"/></svg></a>
+        <a class="jump" href="#store" title="Jump to this section">Our Store<svg aria-hidden="true"><use href="#down"/></svg></a>
+        <a class="jump" href="#categories" title="Jump to this section">Popular Picks<svg aria-hidden="true"><use href="#down"/></svg></a>
+      </nav>
+      <a class="logo" href="#top" aria-label="Red Apple Food Box, back to top"><svg aria-hidden="true"><use href="#apple"/></svg><span><b>Red Apple</b><small>Food Box</small></span></a>
+      <div class="head-right">
+        <a class="head-find" data-maps href="#" target="_blank" rel="noopener noreferrer">Find Our Store</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-haspopup="dialog"><i></i><i></i></button>
+      </div>
+    </header>
+
+    <div class="hero-main">
+      <h1 id="hero-title" aria-label="Good food. Everyday ease.">GOOD FOOD. EVERYDAY EASE.</h1>
+      <div class="hero-bottom">
+        <p class="tagline" id="tagline"><span class="ln">Your Neighborhood Stop.</span><span class="ln">Your Everyday Essentials.</span></p>
+        <div class="hero-right">
+          <div class="feat" id="feat" aria-roledescription="carousel" aria-label="Featured picks">
+            <div class="feat-card glass" id="feat-card">
+              <img class="art" id="feat-img" alt="" width="80" height="80">
+              <div class="feat-info">
+                <span class="feat-tag" id="feat-tag"></span>
+                <span class="feat-title" id="feat-title"></span>
+                <a class="feat-cta" id="feat-cta" href="#products"></a>
+              </div>
+            </div>
+            <div class="dots on-dark" id="feat-dots"></div>
+          </div>
+          <div class="hl glass" id="hl">
+            <div class="hl-top"><strong>Everyday</strong><span class="swatches" aria-hidden="true"><i style="background:#d62828"></i><i style="background:#43854a"></i><i style="background:#f2e6d6"></i><i style="background:#781b24"></i></span></div>
+            <p>The essentials, close by.</p>
+            <img class="art" data-art="shelf" alt="Well-stocked convenience store aisle" loading="lazy" width="400" height="320">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="cats" id="categories" aria-labelledby="cats-title">
+    <div class="cats-top">
+      <div class="badge" data-reveal="scale"><div><b>Everyday</b><span>Convenience made simple</span></div></div>
+      <div class="info-card" data-reveal="rise">
+        <span class="idx">#01</span>
+        <h3 id="cats-title">Little things. Big convenience.</h3>
+        <p>Discover everyday essentials, quick snacks, refreshing drinks, and convenient food options in one neighborhood stop.</p>
+      </div>
+    </div>
+    <div class="ghost-wrap" id="ghost-wrap">
+      <div class="ghost" aria-live="polite" id="ghost">
+        <div class="ghost-row"><span class="gw"></span><span class="gw"></span></div>
+        <div class="ghost-row"><span class="gw"></span><span class="gw hot"></span></div>
+      </div>
+      <div class="cat-card" data-reveal="scale" id="cat-card">
+        <div class="cat-card-inner">
+          <img class="art" id="cat-img" alt="" loading="lazy" width="600" height="800">
+          <div class="cat-cap"><b id="cat-title"></b><span id="cat-body"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cats-controls" role="group" aria-label="Category slides">
+      <button class="arrow-btn outline prev" id="cat-prev" aria-label="Previous category"><svg aria-hidden="true"><use href="#arrow"/></svg></button>
+      <div class="dots" id="cat-dots"></div>
+      <button class="arrow-btn solid" id="cat-next" aria-label="Next category"><svg aria-hidden="true"><use href="#arrow"/></svg></button>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products" aria-labelledby="prod-title">
+    <div class="prod-head">
+      <div>
+        <span class="eyebrow" data-reveal="rise">What you need, when you need it</span>
+        <h2 class="display" id="prod-title" data-lines><span class="ln">Your Everyday</span><span class="ln">Favorites</span></h2>
+      </div>
+      <div class="soon-wrap" data-reveal="scale">
+        <button class="soon" id="soon" type="button" aria-disabled="true" aria-describedby="soon-tip">
+          <img class="art" data-art="aisle" alt="" loading="lazy" width="220" height="220">
+          <span class="soon-label"><svg aria-hidden="true"><use href="#search"/></svg>Check inventory</span>
+        </button>
+        <span class="soon-tag" aria-hidden="true">Coming soon</span>
+        <span class="soon-tip" id="soon-tip" role="tooltip">You&rsquo;ll be able to review and select items very soon.</span>
+      </div>
+    </div>
+    <dl class="facts">
+      <div class="fact" id="snacks" data-reveal="rise"><dt><span class="no">01</span>Snacks &amp; Treats</dt><dd>Reach for sweet treats, salty snacks, and something to enjoy on the go.</dd></div>
+      <div class="fact" id="drinks" data-reveal="rise"><dt><span class="no">02</span>Drinks &amp; Refreshments</dt><dd>Discover bottled beverages, chilled refreshments, and everyday drink options.</dd></div>
+      <div class="fact" id="essentials" data-reveal="rise"><dt><span class="no">03</span>Everyday Essentials</dt><dd>Find practical everyday items and convenient grab-and-go necessities.</dd></div>
+      <div class="fact" id="pantry" data-reveal="rise"><dt><span class="no">04</span>Pantry &amp; Packaged Foods</dt><dd>Explore convenient packaged food options for your daily routine.</dd></div>
+    </dl>
+  </section>
+
+  <!-- STORE -->
+  <section class="store" id="store" aria-labelledby="store-title">
+    <div class="store-grid">
+      <div class="store-intro">
+        <img class="art small" data-art="basket" alt="Basket with fresh apples, water and a snack bar" loading="lazy" width="144" height="108" data-reveal="scale">
+        <h2 class="display" id="store-title" data-lines data-stagger="120"><span class="ln">A Better</span><span class="ln">Everyday Stop</span></h2>
+        <p data-words>From everyday essentials to quick snacks and refreshing drinks, Red Apple Food Box is designed to make your daily stops feel simple, convenient, and welcoming.</p>
+      </div>
+      <div class="store-cards">
+        <article class="tall" data-reveal="rise" data-zoom>
+          <img class="art" data-art="essentials-tall" alt="Shelves of everyday essentials" loading="lazy" width="600" height="800">
+          <div class="cap"><b>Everyday Essentials</b><span>Convenient picks for the things that keep your day moving.</span></div>
+        </article>
+        <article class="tall" data-reveal="rise" data-zoom>
+          <img class="art" data-art="snacks-tall" alt="Shelves of snacks and treats" loading="lazy" width="600" height="800">
+          <div class="cap"><b>Snacks &amp; Refreshments</b><span>Find something to enjoy during your next quick stop.</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-labelledby="stats-title">
+    <span class="eyebrow light" data-reveal="rise">The everyday difference</span>
+    <h2 class="display" id="stats-title" data-lines><span class="ln">Small Stops.</span><span class="ln">Made Simple.</span></h2>
+    <div class="stat-grid">
+      <div class="stat" data-reveal="rise"><b>Daily</b><span>Convenience for your routine</span></div>
+      <div class="stat" data-reveal="rise"><b>Local</b><span>A neighborhood stop</span></div>
+      <div class="stat" data-reveal="rise"><b>Easy</b><span>Simple everyday shopping</span></div>
+      <div class="stat" data-reveal="rise"><b>Essential</b><span>Practical picks for daily life</span></div>
+    </div>
+  </section>
+
+  <!-- VOICES: illustrative priorities, not customer reviews -->
+  <section class="voices" id="testimonials" aria-labelledby="voices-title">
+    <span class="eyebrow" data-reveal="rise">The neighborhood experience</span>
+    <h2 class="display" id="voices-title" data-lines><span class="ln">Convenience That</span><span class="ln">Fits Your Day</span></h2>
+    <div class="quote-grid">
+      <article class="quote" data-reveal="rise">
+        <span class="qm" aria-hidden="true">&ldquo;</span>
+        <h3>Quick everyday stops</h3>
+        <p>A convenient neighborhood option for picking up the little things you need throughout the day.</p>
+        <footer><b>What shoppers value</b><span>Illustrative, not a customer review</span></footer>
+      </article>
+      <article class="quote" data-reveal="rise">
+        <span class="qm" aria-hidden="true">&ldquo;</span>
+        <h3>Easy product discovery</h3>
+        <p>A simple, organized way to explore snacks, beverages, and everyday essentials.</p>
+        <footer><b>Shopping experience</b><span>Illustrative, not a customer review</span></footer>
+      </article>
+      <article class="quote" data-reveal="rise">
+        <span class="qm" aria-hidden="true">&ldquo;</span>
+        <h3>Close to the neighborhood</h3>
+        <p>A local stop designed around the convenience of everyday errands.</p>
+        <footer><b>Neighborhood convenience</b><span>Illustrative, not a customer review</span></footer>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot" id="contact">
+    <div class="cta-band">
+      <div>
+        <span class="eyebrow light" data-reveal="rise">Stop by today</span>
+        <h2 class="display" data-lines><span class="ln">Your Next</span><span class="ln">Quick Stop.</span></h2>
+      </div>
+      <a class="pill pill-light" data-maps data-reveal="rise" href="#" target="_blank" rel="noopener noreferrer">Find Our Store <svg aria-hidden="true"><use href="#ext"/></svg></a>
+    </div>
+    <div class="foot-cols">
+      <div class="brand">
+        <div class="logo"><svg aria-hidden="true"><use href="#apple"/></svg><span><b>Red Apple</b><small>Food Box</small></span></div>
+        <p>Your neighborhood stop for convenient everyday shopping, snacks, drinks, and essential picks.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#store">Store Experience</a></li>
+          <li><a href="#contact">Customer Information</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#snacks">Snacks &amp; Treats</a></li>
+          <li><a href="#drinks">Drinks &amp; Refreshments</a></li>
+          <li><a href="#essentials">Everyday Essentials</a></li>
+          <li><a href="#pantry">Pantry &amp; Packaged Foods</a></li>
+        </ul>
+      </div>
+      <div class="visit-col">
+        <h4>Visit us</h4>
+        <p style="margin:0;color:#fff;font-size:1rem">Red Apple Food Box</p>
+        <a class="url" data-maps href="#" target="_blank" rel="noopener noreferrer" id="maps-url"></a>
+        <a class="linklike" data-maps href="#" target="_blank" rel="noopener noreferrer">Open in Google Maps</a><br><br>
+        <button class="linklike" type="button" data-open-modal>Send a message (demo form)</button>
+        <p class="note">Images are AI-generated for illustration, not photographs of the store.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Red Apple Food Box. All rights reserved.</span>
+      <a data-maps href="#" target="_blank" rel="noopener noreferrer">Find us on Google Maps</a>
+    </div>
+  </footer>
+</main>
+
+<script src="js/photos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
